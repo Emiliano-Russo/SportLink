@@ -2,15 +2,18 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home} from './Home';
-import {Settings} from './Settings';
+import {Home} from './screens/Home';
+import {Settings} from './screens/Settings';
 
 const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
