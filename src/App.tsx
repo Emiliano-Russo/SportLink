@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home} from './screens/Home';
 import {Contacts} from './screens/Contacts';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {EventCreator} from './screens/EventCreator';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,8 +18,10 @@ function App(): React.JSX.Element {
           tabBarIcon: ({focused, color, size}) => {
             let iconName;
 
-            if (route.name === 'Inicio') {
-              iconName = 'futbol'; // Ícono de balón de fútbol
+            if (route.name === 'Planificación') {
+              iconName = 'calendar-alt'; // Ícono para "Planificación"
+            } else if (route.name === 'Inicio') {
+              iconName = 'futbol'; // Ícono de balón de fútbol para "Inicio"
             } else if (route.name === 'Contactos') {
               iconName = 'address-book'; // Ícono de contactos
             }
@@ -28,6 +31,7 @@ function App(): React.JSX.Element {
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
         })}>
+        <Tab.Screen name="Planificación" component={EventCreator} />
         <Tab.Screen name="Inicio" component={Home} />
         <Tab.Screen name="Contactos" component={Contacts} />
       </Tab.Navigator>
