@@ -9,20 +9,11 @@ import {
   Button,
 } from 'react-native';
 import {events_mock} from '../mocks/events_mock';
+import {formatDateTime} from '../utils/formatter';
 
 export const Home = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
-
-  const formatDateTime = (dateString: string) => {
-    const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString();
-    const formattedTime = date.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-    return {formattedDate, formattedTime};
-  };
 
   const openModal = (event: any) => {
     setSelectedEvent(event);
@@ -41,12 +32,16 @@ export const Home = () => {
         data={events_mock}
         keyExtractor={item => item.ownerId}
         renderItem={({item}) => {
-          const {formattedDate, formattedTime} = formatDateTime(item.date);
+          const {formattedDate, formattedTime, dayOfWeek} = formatDateTime(
+            item.date,
+          );
           return (
             <View style={styles.eventCard}>
-              <Text style={styles.eventTitle}>{item.owenrName} organiza</Text>
-              <Text style={styles.eventDetail}>Ubicación: {item.location}</Text>
-              <Text style={styles.eventDetail}>Fecha: {formattedDate}</Text>
+              <Text style={styles.eventTitle}>{item.ownerName} Organiza</Text>
+              <Text style={styles.eventDetail}>
+                {dayOfWeek} {formattedDate}
+              </Text>
+              <Text style={styles.eventDetail}>En {item.location}</Text>
               <Text style={styles.eventDetail}>Hora: {formattedTime}</Text>
               <View style={styles.actions}>
                 <TouchableOpacity
