@@ -1,12 +1,15 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
-    "strict": true, // Mantén la verificación estricta
-    "noImplicitAny": false, // Permite tipos implícitos "any"
-    "skipLibCheck": true, // Ignora errores en archivos de tipo de librerías
-    "resolveJsonModule": true, // Permite importar archivos JSON
-    "esModuleInterop": true, // Habilita la interoperabilidad con ES modules
-    "jsx": "react-native", // Ajustado para React Native
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "jsx": "react-native",
+    "target": "esnext", // Asegúrate de tener un target moderno
+    "moduleResolution": "node", // Resuelve módulos desde node_modules
+    "allowSyntheticDefaultImports": true, // Soporte para imports por defecto
     "baseUrl": ".", // Configura la base para rutas relativas
     "paths": {
       "*": ["node_modules/*"]
@@ -17,7 +20,7 @@
     "index.ts",
     "index.tsx",
     "App.tsx",
-    "types/**/*.d.ts" // Incluye declaraciones personalizadas
+    "types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",

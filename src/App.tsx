@@ -8,10 +8,13 @@ import {Contacts} from './screens/Contacts';
 import {EventCreator} from './screens/event/EventCreator';
 import {BasicDataEvent} from './screens/event/BasicDataEvent';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {ConfirmationTimesScreen} from './screens/event/ConfirmationTimesScreen';
+import {SportEvent} from './interfaces/event';
 
 export type PlanningStackParamList = {
-  EventCreator: undefined; // No requiere parámetros
-  BasicDataEvent: undefined; // No requiere parámetros
+  EventCreator: undefined;
+  BasicDataEvent: undefined;
+  ConfirmationTimesScreen: {sportEvent: SportEvent};
 };
 
 // Creación del Stack Navigator para Planificación
@@ -28,7 +31,12 @@ const PlanningStackScreen = () => {
       <PlanningStack.Screen
         name="BasicDataEvent"
         component={BasicDataEvent}
-        options={{title: 'Crear Evento'}}
+        options={{title: 'Datos del Partido'}}
+      />
+      <PlanningStack.Screen
+        name="ConfirmationTimesScreen"
+        component={ConfirmationTimesScreen}
+        options={{title: 'Jugadores'}}
       />
     </PlanningStack.Navigator>
   );

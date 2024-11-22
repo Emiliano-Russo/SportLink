@@ -10,6 +10,9 @@ import {
   Platform,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {PlanningStackParamList} from '../../App';
 
 export const BasicDataEvent = () => {
   const [dayOfWeek, setDayOfWeek] = useState('');
@@ -18,6 +21,10 @@ export const BasicDataEvent = () => {
   const [totalPlayers, setTotalPlayers] = useState('');
   const [isDayPickerVisible, setDayPickerVisible] = useState(false);
   const [isTimePickerVisible, setTimePickerVisible] = useState(false);
+  const navigation =
+    useNavigation<
+      StackNavigationProp<PlanningStackParamList, 'BasicDataEvent'>
+    >();
 
   const daysOfWeek = [
     'Domingo',
@@ -44,8 +51,17 @@ export const BasicDataEvent = () => {
   };
 
   const handleNext = () => {
-    // Lógica para navegar a la siguiente pantalla
     console.log({dayOfWeek, time, location, totalPlayers});
+    navigation.navigate('ConfirmationTimesScreen', {
+      sportEvent: {
+        dayOfWeek,
+        time,
+        location,
+        totalPlayers: parseInt(totalPlayers, 10),
+        mainPlayers: [],
+        substitutes: [],
+      },
+    });
   };
 
   return (
@@ -131,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
     padding: 16,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   header: {
     fontSize: 24,

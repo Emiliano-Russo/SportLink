@@ -8,12 +8,13 @@ export interface SportEvent {
   location: string; // Ubicación del evento
   date: Date;
   mainPlayers: Player[]; // Jugadores principales
-  substitutes?: Player[]; // Suplentes opcionales
 }
 
 export interface Player {
   user: User; // Información del usuario
   inviteStatus: InviteStatus; // Estado de la invitación
+  confirmationTime: ConfirmationTime;
+  order: number;
 }
 
 export enum InviteStatus {
@@ -21,4 +22,12 @@ export enum InviteStatus {
   Accepted = 1, // Invitación aceptada
   Pending = 3, // Invitación pendiente
   ConfirmLater = 4, // Confirmar más tarde
+}
+
+export enum ConfirmationTime {
+  SameDayMorning = 'Confirmation Same Day (Morning)',
+  SameDayAfternoon = 'Confirmation Same Day (Afternoon)',
+  LastNight = 'Confirmation Last Night',
+  TwoDaysBefore = 'Confirmation 2 Days Before',
+  Flexible = 'Flexible Confirmation',
 }
