@@ -7,7 +7,7 @@ export interface SportEvent {
   totalPlayers: number; // Número total de jugadores esperados
   location: string; // Ubicación del evento
   date: Date;
-  mainPlayers: Player[]; // Jugadores principales
+  players: Player[]; // Jugadores principales
 }
 
 export interface Player {

@@ -10,6 +10,8 @@ import {BasicDataEvent} from './screens/event/BasicDataEvent';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {ConfirmationTimesScreen} from './screens/event/ConfirmationTimesScreen';
 import {SportEvent} from './interfaces/event';
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
 
 export type PlanningStackParamList = {
   EventCreator: undefined;
@@ -47,31 +49,33 @@ const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          headerShown: false,
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName;
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({route}) => ({
+            headerShown: false,
+            tabBarIcon: ({focused, color, size}) => {
+              let iconName;
 
-            if (route.name === 'Planificación') {
-              iconName = 'calendar-alt'; // Ícono para "Planificación"
-            } else if (route.name === 'Inicio') {
-              iconName = 'futbol'; // Ícono de balón de fútbol para "Inicio"
-            } else if (route.name === 'Contactos') {
-              iconName = 'address-book'; // Ícono de contactos
-            }
+              if (route.name === 'Planificación') {
+                iconName = 'calendar-alt'; // Ícono para "Planificación"
+              } else if (route.name === 'Inicio') {
+                iconName = 'futbol'; // Ícono de balón de fútbol para "Inicio"
+              } else if (route.name === 'Contactos') {
+                iconName = 'address-book'; // Ícono de contactos
+              }
 
-            return <Icon name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}>
-        <Tab.Screen name="Planificación" component={PlanningStackScreen} />
-        <Tab.Screen name="Inicio" component={Home} />
-        <Tab.Screen name="Contactos" component={Contacts} />
-      </Tab.Navigator>
-    </NavigationContainer>
+              return <Icon name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: 'tomato',
+            tabBarInactiveTintColor: 'gray',
+          })}>
+          <Tab.Screen name="Planificación" component={PlanningStackScreen} />
+          <Tab.Screen name="Inicio" component={Home} />
+          <Tab.Screen name="Contactos" component={Contacts} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
